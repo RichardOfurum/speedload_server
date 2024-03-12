@@ -5,7 +5,7 @@ export type ProductDocument = HydratedDocument<Order>
 
 @Schema()
 export class Order {
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Product', require: true })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Order', require: true })
     order_id: string;
 
     @Prop({ require: true })
@@ -16,7 +16,6 @@ export class Order {
 
     @Prop({ require: true })
     product_id: string;
-
 
     @Prop({ require: true })
     price: number;

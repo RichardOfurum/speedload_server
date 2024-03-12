@@ -34,7 +34,7 @@ export class OrderService {
     return orderData;
   }
 
-  async findBySellerId(seller_id: string, page: number, limit: number = 10) {
+  async findBySellerId(page: number, limit: number = 10, seller_id: string) {
     const skip = (page - 1) * limit;
     const orderData = await this.orderModel.find({ seller_id }).skip(skip).limit(limit).exec();
 
@@ -45,37 +45,39 @@ export class OrderService {
     return orderData;
   }
 
-  async findByBuyerId(buyer_id: string, page: number = 1, limit: number = 10) {
+
+  async findByBuyerId(page: number = 1, limit: number = 10, buyer_id: string) {
     const skip = (page - 1) * limit;
     const orderData = await this.orderModel.find({ buyer_id }).skip(skip).limit(limit).exec();
 
-    if (!orderData || orderData.length == 0) {
-      throw new NotFoundException('No record fund')
+    if (!orderData || orderData.length === 0) {
+      throw new NotFoundException('No record found');
     }
 
     return orderData;
   }
 
-  async findByBuyerEmail(buyer_email: string, page: number, limit: number = 10) {
+  async findByBuyerEmail(page: number, limit: number = 10, buyer_email: string) {
     const skip = (page - 1) * limit;
     const orderData = await this.orderModel.find({ buyer_email }).skip(skip).limit(limit).exec();
 
     if (!orderData || orderData.length == 0) {
-      throw new NotFoundException('No record fund')
+      throw new NotFoundException('No record found')
     }
 
     return orderData;
   }
 
-  async findByLocation(location: string, page: number, limit: number = 10) {
+  async findByLocation(page: number, limit: number = 10, location: string,) {
     const skip = (page - 1) * limit;
     const orderData = await this.orderModel.find({ location }).skip(skip).limit(limit).exec();
 
     if (!orderData || orderData.length == 0) {
-      throw new NotFoundException('No record fund')
+      throw new NotFoundException('No record found')
     }
 
     return orderData;
+
   }
 
   async findOne(id: string) {
